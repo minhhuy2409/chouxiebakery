@@ -1,0 +1,231 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>Chouxie - Tiệm Bánh Online</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-color: #b45f06;
+            --secondary-color: #f8f1eb;
+            --text-color: #5a3727;
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #fffaf7;
+            font-family: var(--body-font);
+            color: var(--text-color);
+        }
+        .navbar {
+            background-color: #fff;
+            font-family: var(--body-font);
+        }
+        .navbar-brand span {
+            font-family: var(--heading-font);
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        .nav-link {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1562440102-395a4a40228d?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: var(--heading-font);
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1rem auto;
+        }
+        /* Filter & Search */
+        .filter-bar {
+            background: var(--secondary-color);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+        .btn-filter {
+            background-color: white;
+            border: 1px solid #ddd;
+            color: var(--text-color);
+        }
+        .btn-filter.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        /* Product Card */
+        .card {
+            border: none;
+            border-radius: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(180, 95, 6, 0.15);
+        }
+        .card-title a {
+            text-decoration: none;
+            color: #6b3e26;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .card-title a:hover {
+            color: var(--primary-color);
+        }
+        .card-img-top {
+            transition: transform 0.4s ease;
+        }
+        .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        .btn-buy {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .btn-buy:hover {
+            background-color: #944b04;
+            border-color: #944b04;
+            color: white;
+        }
+        footer {
+            background-color: #f8f1eb;
+            padding: 40px 0;
+            margin-top: 60px;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER + NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'cake_list' %}">
+            <img src="{% static 'shop/images/hhh.png' %}" alt="Chouxie Logo" height="60" class="me-2 rounded-circle">
+            <span>Chouxie</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="{% url 'cake_list' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- DYNAMIC CONTENT BLOCK -->
+{% block content %}
+    <!-- HERO BANNER -->
+    <section class="hero">
+        <div class="container">
+            <h1>Sweet Moments, Baked Fresh</h1>
+            <p>Explore the colorful and flavorful world of pastries at Chouxie. Each cake is a work of art.</p>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <div class="container py-5">
+        <h2 class="text-center mb-4" style="font-family: var(--heading-font); color: var(--primary-color);">Our Delicious Cakes</h2>
+
+        <!-- FILTER AND SEARCH BAR -->
+        <div class="filter-bar mb-5">
+            <div class="row g-3 align-items-center">
+                <!-- Filter Buttons -->
+                <div class="col-lg-8">
+                    <a href="{% url 'cake_list' %}" class="btn btn-filter me-2 mb-2 {% if not current_filter %}active{% endif %}">Tất cả</a>
+                    {% for value, display in cake_types %}
+                        <a href="?type={{ value }}" class="btn btn-filter me-2 mb-2 {% if current_filter == value %}active{% endif %}">{{ display }}</a>
+                    {% endfor %}
+                </div>
+                <!-- Search Form -->
+                <div class="col-lg-4">
+                    <form method="get" action="{% url 'cake_list' %}" class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Tìm kiếm bánh..." name="q" value="{{ request.GET.q|default_if_none:'' }}">
+                        <button class="btn btn-buy" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAKE LIST -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            {% for cake in cakes %}
+            <div class="col">
+                <div class="card h-100 shadow-sm bg-white">
+                    <a href="{{ cake.get_absolute_url }}">
+                        {% if cake.image %}
+                            <img src="{{ cake.image.url }}" class="card-img-top" alt="{{ cake.name }}" style="height: 250px; object-fit: cover;">
+                        {% else %}
+                            <img src="{% static 'shop/images/placeholder.png' %}" class="card-img-top" alt="No image" style="height: 250px; object-fit: cover;">
+                        {% endif %}
+                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title"><a href="{{ cake.get_absolute_url }}">{{ cake.name }}</a></h5>
+                        <p class="card-text"><span class="badge rounded-pill text-bg-light">{{ cake.get_cake_type_display }}</span></p>
+                        <p class="card-text text-muted small flex-grow-1">{{ cake.description|truncatewords:15 }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="fs-5 fw-bold" style="color: var(--primary-color);">{{ cake.price|floatformat:0 }} VND</span>
+                            <a href="#" class="btn btn-buy"><i class="bi bi-cart-plus"></i> Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="text-center fs-4 mt-5">😢 Rất tiếc, không tìm thấy sản phẩm nào phù hợp.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+<!-- FOOTER -->
+<footer class="text-center">
+    <div class="container">
+        <p class="mb-2">© 2025 Chouxie Bakery. All Rights Reserved.</p>
+        <p class="mb-0">
+            <a href="#" class="text-decoration-none mx-2" style="color: var(--text-color);"><i class="bi bi-facebook"></i> Facebook</a>
+            <a href="#" class="text-decoration-none mx-2" style="color: var(--text-color);"><i class="bi bi-instagram"></i> Instagram</a>
+            <a href="#" class="text-decoration-none mx-2" style="color: var(--text-color);"><i class="bi bi-youtube"></i> YouTube</a>
+        </p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

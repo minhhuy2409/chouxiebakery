@@ -1,0 +1,26 @@
+{% extends "shop/cake_list.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ cake.image.url }}" class="img-fluid rounded-4 shadow" alt="{{ cake.name }}">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+            <h1 style="font-family: var(--heading-font); color: var(--primary-color);">{{ cake.name }}</h1>
+            <p><span class="badge bg-secondary fs-6">{{ cake.get_cake_type_display }}</span></p>
+            <p class="lead mt-3">{{ cake.description }}</p>
+
+            <div class="my-4">
+                <span class="fs-2 fw-bold" style="color: var(--primary-color);">{{ cake.price|floatformat:0 }} VND</span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-block">
+                <a href="#" class="btn btn-buy btn-lg px-5"><i class="bi bi-cart-plus-fill"></i> Mua ngay</a>
+                <a href="{% url 'cake_list' %}" class="btn btn-outline-secondary btn-lg">Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
